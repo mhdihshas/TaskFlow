@@ -83,17 +83,25 @@ function renderStats() {
     done: tasks.filter((task) => task.status === "Done").length,
   };
 
-  statsNode.innerHTML = [
+  const stats = [
     { label: "Total", value: counts.total },
     { label: "To Do", value: counts.todo },
     { label: "In Progress", value: counts.progress },
     { label: "Done", value: counts.done },
-  ]
-    .map(
-      (stat) =>
-        `<article class="stat-card"><span>${stat.label}</span><strong>${stat.value}</strong></article>`
-    )
-    .join("");
+  ];
+
+  statsNode.replaceChildren(
+    ...stats.map((stat) => {
+      const card = document.createElement("article");
+      card.className = "stat-card";
+      const label = document.createElement("span");
+      label.textContent = stat.label;
+      const value = document.createElement("strong");
+      value.textContent = String(stat.value);
+      card.append(label, value);
+      return card;
+    })
+  );
 }
 
 function formatDueDate(dateString) {
@@ -112,38 +120,51 @@ function renderTasks() {
 
   emptyStateNode.hidden = filteredTasks.length > 0;
 
-  taskListNode.innerHTML = filteredTasks
-    .map((task) => {
+  taskListNode.replaceChildren(
+    ...filteredTasks.map((task) => {
       const priorityClass = `task--${task.priority.toLowerCase()}`;
-      const doneBadgeClass = task.status === "Done" ? "badge badge--done" : "badge";
+      const taskNode = document.createElement("li");
+      taskNode.className = `task ${priorityClass}`;
 
-      return `
-      <li class="task ${priorityClass}">
-        <div>
-          <strong>${escapeHtml(task.title)}</strong>
-          <p>${escapeHtml(task.description) || "No description"}</p>
-        </div>
-        <div class="task__meta">
-          <span class="badge">${task.priority}</span>
-          <span class="${doneBadgeClass}">${task.status}</span>
-          <span class="badge">Due: ${formatDueDate(task.dueDate)}</span>
-        </div>
-        <div class="task__actions">
-          <button type="button" data-action="edit" data-id="${task.id}">Edit</button>
-          <button type="button" class="delete" data-action="delete" data-id="${task.id}">Delete</button>
-        </div>
-      </li>`;
+      const details = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = String(task.title ?? "");
+      const description = document.createElement("p");
+      description.textContent = String(task.description ?? "") || "No description";
+      details.append(title, description);
+
+      const meta = document.createElement("div");
+      meta.className = "task__meta";
+      const priorityBadge = document.createElement("span");
+      priorityBadge.className = "badge";
+      priorityBadge.textContent = task.priority;
+      const statusBadge = document.createElement("span");
+      statusBadge.className = task.status === "Done" ? "badge badge--done" : "badge";
+      statusBadge.textContent = task.status;
+      const dueBadge = document.createElement("span");
+      dueBadge.className = "badge";
+      dueBadge.textContent = `Due: ${formatDueDate(task.dueDate)}`;
+      meta.append(priorityBadge, statusBadge, dueBadge);
+
+      const actions = document.createElement("div");
+      actions.className = "task__actions";
+      const editButton = document.createElement("button");
+      editButton.type = "button";
+      editButton.dataset.action = "edit";
+      editButton.dataset.id = task.id;
+      editButton.textContent = "Edit";
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "delete";
+      deleteButton.dataset.action = "delete";
+      deleteButton.dataset.id = task.id;
+      deleteButton.textContent = "Delete";
+      actions.append(editButton, deleteButton);
+
+      taskNode.append(details, meta, actions);
+      return taskNode;
     })
-    .join("");
-}
-
-function escapeHtml(value) {
-  return String(value ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+  );
 }
 
 function render() {
