@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <h1>TaskFlow</h1>
+        <p>Track tasks with priorities, due dates, and statuses.</p>
+      </header>
+
+      <section class="panel" aria-label="Create or update task">
+        <h2>Task details</h2>
+        <form id="task-form" class="task-form">
+          <input type="hidden" id="task-id" />
+
+          <label for="task-title">Title</label>
+          <input id="task-title" name="title" type="text" maxlength="120" required />
+
+          <label for="task-description">Description</label>
+          <textarea id="task-description" name="description" rows="3" maxlength="500"></textarea>
+
+          <div class="task-form__grid">
+            <div>
+              <label for="task-priority">Priority</label>
+              <select id="task-priority" name="priority" required>
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            <div>
+              <label for="task-status">Status</label>
+              <select id="task-status" name="status" required>
+                <option value="To Do" selected>To Do</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+            <div>
+              <label for="task-due-date">Due date</label>
+              <input id="task-due-date" name="dueDate" type="date" />
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="submit-btn">Add task</button>
+            <button type="button" id="cancel-btn" class="ghost" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel" aria-label="Search and filter tasks">
+        <h2>Find tasks</h2>
+        <div class="filters">
+          <input id="search" type="search" placeholder="Search title or description" aria-label="Search tasks" />
+          <select id="filter-status" aria-label="Filter by status">
+            <option value="All">All statuses</option>
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+          <select id="filter-priority" aria-label="Filter by priority">
+            <option value="All">All priorities</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Task dashboard">
+        <h2>Dashboard</h2>
+        <div class="stats" id="stats"></div>
+      </section>
+
+      <section class="panel" aria-label="Task list">
+        <h2>Tasks</h2>
+        <ul id="task-list" class="task-list"></ul>
+        <p id="empty-state" class="empty-state" hidden>No tasks match the current filters.</p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
