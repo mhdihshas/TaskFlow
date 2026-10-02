@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#184d3e">
+<meta name="description" content="Create a local TaskFlow demo account."><title>Create account — TaskFlow</title>
+<script>try{const t=localStorage.getItem('tf_theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch{}</script>
+<link rel="stylesheet" href="style.css"><script src="auth.js" defer></script>
+</head>
+<body class="auth-page">
+<main class="auth-layout">
+  <section class="auth-story" aria-label="TaskFlow introduction">
+    <a class="auth-brand" href="index.html"><span class="brand-mark">↗</span><span>taskflow<span class="brand-dot">.</span></span></a>
+    <div class="auth-copy"><span class="auth-kicker">START FRESH</span><h1>Your plans.<br>Your pace.</h1><p>Create a simple personal workspace for tasks, deadlines, priorities, and progress.</p>
+      <div class="auth-feature-grid"><div><strong>01</strong><span>Capture</span></div><div><strong>02</strong><span>Organize</span></div><div><strong>03</strong><span>Complete</span></div></div>
+    </div>
+    <p class="auth-footnote">First-year project · Browser-based demo authentication</p>
+  </section>
+  <section class="auth-panel">
+    <button class="auth-theme" id="authTheme" type="button" aria-label="Switch appearance">☾</button>
+    <div class="auth-card"><span class="auth-kicker">CREATE YOUR SPACE</span><h2>Create an account</h2><p class="auth-subtitle">Your workspace will be separated from other local demo accounts.</p>
+      <div id="authMessage" class="auth-message" role="alert" hidden></div>
+      <form id="registerForm" class="auth-form" novalidate>
+        <label>Full name<input id="name" type="text" autocomplete="name" maxlength="50" placeholder="Your name" required></label>
+        <label>Email address<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Password<div class="password-field"><input id="password" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters" required><button type="button" data-password-toggle data-target="password" aria-pressed="false">Show</button></div></label>
+        <label>Confirm password<div class="password-field"><input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" placeholder="Repeat your password" required><button type="button" data-password-toggle data-target="confirmPassword" aria-pressed="false">Show</button></div></label>
+        <button class="button primary auth-submit" type="submit">Create account</button>
+      </form>
+      <p class="auth-switch">Already have an account? <a href="index.html">Sign in</a></p>
+      <div class="auth-demo-note"><strong>For this academic demo</strong><span>Password data is hashed before local storage, but this is still not production authentication.</span></div>
+    </div>
+  </section>
+</main>
+</body></html>

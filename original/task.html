@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TaskFlow</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Task_Flow</h1>
+    <div class="userbar">
+    </div>
+  </header>
+  
+  <!-- APP -->
+  <main id="appView" class="container">
+    <!-- DASHBOARD -->
+    <section class="dashboard">
+      <div class="stat">
+        <div class="statNum" id="statTotal">0</div>
+        <div class="statLabel">Total</div>
+      </div>
+      <div class="stat">
+        <div class="statNum" id="statDone">0</div>
+        <div class="statLabel">Done</div>
+      </div>
+      <div class="stat">
+        <div class="statNum" id="statOverdue">0</div>
+        <div class="statLabel">Overdue</div>
+      </div>
+    </section>
+
+    <!-- ADD TASK -->
+    <section class="card">
+      <h2>Add Task</h2>
+      <form id="taskForm" class="grid">
+        <label>
+          Title *
+          <input id="title" type="text" maxlength="60" required />
+        </label>
+
+        <label>
+          Due Date
+          <input id="dueDate" type="date" />
+        </label>
+
+        <label>
+          Priority
+          <select id="priority">
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High</option>
+          </select>
+        </label>
+
+        <label>
+          Status
+          <select id="status">
+            <option value="ToDo" selected>To Do</option>
+            <option value="InProgress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+        </label>
+
+        <label class="full">
+          Description
+          <textarea id="description" rows="3" maxlength="300" placeholder="Optional..."></textarea>
+        </label>
+
+        <div class="full row">
+          <button class="btn" type="submit">Add Task</button>
+          <button id="clearAllBtn" class="btn btn-danger" type="button">Clear All Tasks</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- CONTROLS -->
+    <section class="card">
+      <h2>Tasks</h2>
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="Search by title..." />
+
+        <select id="filterStatus">
+          <option value="All" selected>All Status</option>
+          <option value="ToDo">To Do</option>
+          <option value="InProgress">In Progress</option>
+          <option value="Done">Done</option>
+        </select>
+
+        <select id="sortBy">
+          <option value="created_desc" selected>Newest</option>
+          <option value="created_asc">Oldest</option>
+          <option value="due_asc">Due Date (Soon)</option>
+          <option value="due_desc">Due Date (Late)</option>
+          <option value="priority_desc">Priority (High)</option>
+          <option value="priority_asc">Priority (Low)</option>
+        </select>
+      </div>
+
+      <div id="taskList" class="taskList"></div>
+      <p id="emptyMsg" class="muted hidden">No tasks found.</p>
+    </section>
+
+    <!-- EDIT MODAL -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modalCard">
+        <div class="modalHeader">
+          <h3>Edit Task</h3>
+          <button id="closeModalBtn" class="btn btn-ghost" type="button">✕</button>
+        </div>
+
+        <form id="editForm" class="grid">
+          <input type="hidden" id="editId" />
+
+          <label>
+            Title *
+            <input id="editTitle" type="text" maxlength="60" required />
+          </label>
+
+          <label>
+            Due Date
+            <input id="editDueDate" type="date" />
+          </label>
+
+          <label>
+            Priority
+            <select id="editPriority">
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+            </select>
+          </label>
+
+          <label>
+            Status
+            <select id="editStatus">
+              <option value="ToDo">To Do</option>
+              <option value="InProgress">In Progress</option>
+              <option value="Done">Done</option>
+            </select>
+          </label>
+
+          <label class="full">
+            Description
+            <textarea id="editDescription" rows="3" maxlength="300"></textarea>
+          </label>
+
+          <div class="full row">
+            <button class="btn" type="submit">Save Changes</button>
+            <button id="cancelEditBtn" class="btn btn-ghost" type="button">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

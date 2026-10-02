@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#184d3e">
+<meta name="description" content="Sign in to TaskFlow — a calmer space to plan, focus, and finish.">
+<title>Sign in — TaskFlow</title>
+<script>try{const t=localStorage.getItem('tf_theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch{}</script>
+<link rel="stylesheet" href="style.css"><script src="auth.js" defer></script>
+</head>
+<body class="auth-page">
+<main class="auth-layout">
+  <section class="auth-story" aria-label="TaskFlow introduction">
+    <a class="auth-brand" href="index.html"><span class="brand-mark">↗</span><span>taskflow<span class="brand-dot">.</span></span></a>
+    <div class="auth-copy"><span class="auth-kicker">PERSONAL TASK WORKSPACE</span><h1>Make space for<br>what matters.</h1><p>Plan your day, keep priorities visible, and turn small steps into real progress.</p>
+      <div class="auth-feature-grid"><div><strong>01</strong><span>Plan clearly</span></div><div><strong>02</strong><span>Focus calmly</span></div><div><strong>03</strong><span>Finish more</span></div></div>
+    </div>
+    <p class="auth-footnote">First-year project · Browser-based demo authentication</p>
+  </section>
+  <section class="auth-panel">
+    <button class="auth-theme" id="authTheme" type="button" aria-label="Switch appearance">☾</button>
+    <div class="auth-card"><span class="auth-kicker">WELCOME BACK</span><h2>Sign in to TaskFlow</h2><p class="auth-subtitle">Continue to your personal workspace.</p>
+      <div id="authMessage" class="auth-message" role="alert" hidden></div>
+      <form id="loginForm" class="auth-form" novalidate>
+        <label>Email address<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Password<div class="password-field"><input id="password" type="password" autocomplete="current-password" placeholder="Enter your password" required><button type="button" data-password-toggle data-target="password" aria-pressed="false">Show</button></div></label>
+        <button class="button primary auth-submit" type="submit">Sign in</button>
+      </form>
+      <p class="auth-switch">New to TaskFlow? <a href="register.html">Create an account</a></p>
+      <div class="auth-demo-note"><strong>Demo authentication</strong><span>Accounts and tasks are stored only in this browser. Do not reuse a real password.</span></div>
+    </div>
+  </section>
+</main>
+</body></html>
